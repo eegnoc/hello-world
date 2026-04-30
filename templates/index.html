@@ -185,7 +185,7 @@
     </div>
   </div>
   <div class="header-right">
-    <span class="badge-live">LIVE</span>
+    <span class="badge-live" id="source-badge">LIVE</span>
     <span id="last-refresh">—</span>
     <button id="refresh-btn">↻ Refresh</button>
   </div>
@@ -471,6 +471,18 @@
       document.getElementById("bd-disc").textContent = "−" + b.discount_pct.toFixed(1) + "% off · Save " + fmt(b.savings);
       document.getElementById("bd-link").href = b.listing_url;
       document.getElementById("best-deal-banner").style.display = "flex";
+    }
+
+    // Source badge
+    const badge = document.getElementById("source-badge");
+    if (data.data_source === "mock") {
+      badge.textContent = "DEMO";
+      badge.style.background = "#d29922";
+      badge.title = "No API keys set — showing mock data. Set EBAY_CLIENT_ID, SERPAPI_KEY, or FB_COOKIE to use live data.";
+    } else {
+      badge.textContent = "LIVE";
+      badge.style.background = "";
+      badge.title = "";
     }
 
     // Refresh time
